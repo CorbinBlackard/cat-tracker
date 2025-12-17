@@ -90,6 +90,6 @@ class Cat < ApplicationRecord
     end
 
     def reset_daily_count
-        update(times_fed_today: 0) unless last_fed_at&.today?
+        update(times_fed_today: 0)
     end
 end
