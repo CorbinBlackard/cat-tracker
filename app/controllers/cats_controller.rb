@@ -20,6 +20,12 @@ class CatsController < ApplicationController
   def edit
   end
 
+  def feed
+    @cat = Cat.find(params[:id])
+    @cat.feed!
+    redirect_to @cat, notice: "#{@cat.name} has been marked as fed!"
+  end
+
   # POST /cats or /cats.json
   def create
     @cat = Cat.new(cat_params)

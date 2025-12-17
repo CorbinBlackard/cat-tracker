@@ -8,3 +8,24 @@
 
 	<%= button_to "Destroy this cat", @cat, method: :delete %>
 </div>
+
+
+<!-- Simple feeding status without Bootstrap -->
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; background: #f8f9fa;">
+	<h3>🍽️ Feeding Status</h3>
+	
+	<% if @cat.needs_feeding? %>
+		<div style="background: #fff3cd; padding: 10px; border: 1px solid #ffc107;">
+			<p><strong>⚠️ This cat needs feeding!</strong></p>
+			<p>Last fed: <%= @cat.time_since_last_fed %></p>
+			<%= button_to "✅ Mark as Fed Now", feed_cat_path(@cat), method: :post %>
+		</div>
+	<% else %>
+		<div style="background: #d1ecf1; padding: 10px; border: 1px solid #0dcaf0;">
+			<p><strong>✅ Feeding Status Good</strong></p>
+			<p>Last fed: <%= @cat.time_since_last_fed %></p>
+			<%= button_to "🔄 Update as Fed Now", feed_cat_path(@cat), method: :post %>
+		</div>
+	<% end %>
+	<p>Times fed today: <%= @cat.times_fed_today%> </p>
+</div>
