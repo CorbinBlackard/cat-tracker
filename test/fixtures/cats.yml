@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  color: MyString
+  pattern: MyString
+  temperament: MyString
+  location: MyString
+  last_seen: 2025-12-17 15:18:20
+  notes: MyText
+
+two:
+  name: MyString
+  color: MyString
+  pattern: MyString
+  temperament: MyString
+  location: MyString
+  last_seen: 2025-12-17 15:18:20
+  notes: MyText
