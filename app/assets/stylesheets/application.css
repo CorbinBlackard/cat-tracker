@@ -1,1 +1,8 @@
 /* @import "bootstrap"; */
+
+.cat_card {
+	border: solid black;
+	text-align: center;
+	margin: 1rem;
+	border-radius: 3rem;
+}

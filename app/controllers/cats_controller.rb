@@ -8,6 +8,7 @@ class CatsController < ApplicationController
 
   # GET /cats/1 or /cats/1.json
   def show
+    @cats = Cat.find(params[:id])
   end
 
   # GET /cats/new
