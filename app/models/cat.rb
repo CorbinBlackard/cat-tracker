@@ -29,43 +29,67 @@ class Cat < ApplicationRecord
         length: { maximum: 500, too_long: "Notes are too long (max 500 characters)" },
         allow_blank: true
 
+
     def needs_feeding?
-    last_fed_at.nil? || last_fed_at < 6.hours.ago
+        last_fed_at.nil? || last_fed_at < 6.hours.ago
     end
 
     def fed_recently?
-    return false if last_fed_at.nil?
-    last_fed_at > 2.hours.ago
+        return false if last_fed_at.nil?
+        last_fed_at > 2.hours.ago
     end
 
     def time_since_last_fed
-    return "Never fed" if last_fed_at.nil?
+        return "Never fed" if last_fed_at.nil?
 
-    seconds = Time.now - last_fed_at
+        seconds = Time.now - last_fed_at
 
-    case
-    when seconds < 60
-        "just now"
-    when seconds < 3600
-        minutes = (seconds / 60).to_i
-        "#{minutes} #{'minute'.pluralize(minutes)} ago"
-    when seconds < 86400
-        hours = (seconds / 3600).to_i
-        "#{hours} #{'hour'.pluralize(hours)} ago"
-    else
-        days = (seconds / 86400).to_i
-        "#{days} #{'day'.pluralize(days)} ago"
+        case
+        when seconds < 60
+            "just now"
+        when seconds < 3600
+            minutes = (seconds / 60).to_i
+            "#{minutes} #{'minute'.pluralize(minutes)} ago"
+        when seconds < 86400
+            hours = (seconds / 3600).to_i
+            "#{hours} #{'hour'.pluralize(hours)} ago"
+        else
+            days = (seconds / 86400).to_i
+            "#{days} #{'day'.pluralize(days)} ago"
+        end
     end
+
+    def reset_daily_count_if_needed
+        if last_fed_at.nil? || last_fed_at.to_date < Date.today
+            update(times_fed_today: 0)
+        end
+    end
+
+    def can_be_fed_today?
+        reset_daily_count_if_needed
+        times_fed_today < 3
+    end
+
+    def daily_feeds_remaining
+        reset_daily_count_if_needed
+        3 - times_fed_today
     end
 
     def feed!
-    update(
-        last_fed_at: Time.now,
-        times_fed_today: (last_fed_at&.today? ? times_fed_today + 1 : 1)
-    )
+        reset_daily_count_if_needed
+
+        if times_fed_today >= 3
+            errors.add(:base, "#{name} has already been fed 3 times today!")
+            return false
+        end
+
+        update(
+            last_fed_at: Time.now,
+            times_fed_today: (last_fed_at&.today? ? times_fed_today + 1 : 1)
+        )
     end
 
     def reset_daily_count
-    update(times_fed_today: 0) unless last_fed_at&.today?
+        update(times_fed_today: 0) unless last_fed_at&.today?
     end
 end
