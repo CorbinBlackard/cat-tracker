@@ -1,8 +1,14 @@
 /* @import "bootstrap"; */
 
 .cat_card {
+	margin-right: 10rem;
 	border: solid black;
 	text-align: center;
-	margin: 1rem;
+	margin-left: 10rem;
 	border-radius: 3rem;
+	margin-bottom: 2rem;
+}
+
+.cat_details {
+	text-align: center;
 }

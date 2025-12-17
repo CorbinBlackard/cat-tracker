@@ -2,20 +2,20 @@
 
 <% content_for :title, "Cats" %>
 
-<h1>Neighorhood Cats</h1>
+<div class="container">
+	<h1>Neighorhood Cats</h1>
 
-<div id="cats">
-	<div class="container">
-		<% @cats.each do |cat| %>
-			<div class="cat_card">
-				<%= render cat %>
-				<p>
-					<%= link_to "Show this cat", cat %>
-				</p>
-			</div>
-		<% end %>
+	<div id="cats">
+			<% @cats.each do |cat| %>
+				<div class="cat_card">
+					<%= render cat %>
+					<p>
+						<%= link_to "Show this cat", cat %>
+					</p>
+				</div>
+			<% end %>
 	</div>
-</div>
 
-<%= link_to "New cat", new_cat_path %>
-<%= link_to "Back", root_path %>
+	<%= link_to "New cat", new_cat_path %>
+	<%= link_to "Back", root_path %>
+</div>
