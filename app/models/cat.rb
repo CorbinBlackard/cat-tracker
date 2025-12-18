@@ -91,13 +91,13 @@ class Cat < ApplicationRecord
    def reset_daily_count_if_needed
       # Always reset if times_fed_today is 3 and it's a new day
       if times_fed_today >= 3 && (last_fed_at.nil? || last_fed_at < 24.hours.ago)
-      update(times_fed_at: 0)
-      true
+         update(times_fed_at: 0)
+         true
       elsif last_fed_at.nil? || last_fed_at < 24.hours.ago
-      update(times_fed_today: 0)
-      true
+         update(times_fed_today: 0)
+         true
       else
-      false
+         false
       end
    end
 
@@ -116,8 +116,8 @@ class Cat < ApplicationRecord
       reset_daily_count_if_needed
 
       if times_fed_today >= 3
-      errors.add(:base, "#{name} has already been fed 3 times today!")
-      return false
+         errors.add(:base, "#{name} has already been fed 3 times today!")
+         return false
       end
 
       update(
