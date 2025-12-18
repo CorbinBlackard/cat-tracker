@@ -22,8 +22,11 @@ class CatsController < ApplicationController
 
   def feed
     @cat = Cat.find(params[:id])
-    @cat.feed!
-    redirect_to @cat, notice: "#{@cat.name} has been marked as fed!"
+    if @cat.feed!
+      redirect_to cats_path, notice: "#{@cat.name} has been fed! 🐟"
+    else
+      redirect_to cats_path, alert: "Could not feed #{@cat.name}: #{@cat.errors.full_messages.join(', ')}"
+    end
   end
 
   # POST /cats or /cats.json
