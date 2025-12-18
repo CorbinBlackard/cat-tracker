@@ -67,6 +67,12 @@ class CatsController < ApplicationController
     end
   end
 
+  def was_spotted
+    @cat = Cat.find(params[:id])
+    @cat.update(last_seen: Time.now)
+    redirect_to root_path, notice: "You spotted #{@cat.name}!"
+  end
+
   def reset_feeding
     @cat = Cat.find(params[:id])
     @cat.update(times_fed_today: 0, last_fed_at: nil)
