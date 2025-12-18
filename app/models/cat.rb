@@ -32,6 +32,17 @@ class Cat < ApplicationRecord
     validates :favorite_food,
         length: { minimum: 2, too_short: "Food must be at least 2 characters" }
 
+    validates :times_spotted,
+        numericality: {
+          only_integer: true,
+          greater_than_or_equal_to: 0,
+          message: "must be non-negative number"
+        }
+
+    def spotted!
+      update(times_spotted: times_spotted + 1)
+      update(last_seen: Time.now)
+    end
 
     def repair_feeding_data!
       # If data looks broken, fix it

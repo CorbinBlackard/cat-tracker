@@ -67,9 +67,9 @@ class CatsController < ApplicationController
     end
   end
 
-  def was_spotted
+  def spotted
     @cat = Cat.find(params[:id])
-    @cat.update(last_seen: Time.now)
+    @cat.spotted!
     redirect_to root_path, notice: "You spotted #{@cat.name}!"
   end
 
@@ -88,6 +88,6 @@ class CatsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cat_params
-      params.expect(cat: [ :name, :color, :pattern, :temperament, :location, :last_seen, :notes, :favorite_food ])
+      params.expect(cat: [ :name, :color, :pattern, :temperament, :location, :last_seen, :notes, :favorite_food, :times_spotted ])
     end
 end
