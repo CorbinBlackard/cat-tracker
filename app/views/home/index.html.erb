@@ -41,11 +41,14 @@
 					<%= cat.color %> <%= cat.pattern %>
 					<br>
 					<small class="text-muted">
-					Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
+						Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
 					</small>
-					<small> <%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-info", form: {style: "padding: 1px 5px; font-size: 0.8rem;"}%> 
-					<p> Spotted <%= cat.times_spotted %> times </p>
+					<small> 
+						<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-info", form: {style: "padding: 1px 5px; font-size: 0.8rem;"}%> 
+						Spotted <%= cat.times_spotted %> times
+						<%= button_to "Reset sightings", reset_spots_cat_path(cat), method: :post%>
 					</small>
+					
 				</div>
 				<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
 			</li>

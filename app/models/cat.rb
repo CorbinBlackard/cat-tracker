@@ -44,6 +44,10 @@ class Cat < ApplicationRecord
       update(last_seen: Time.now)
     end
 
+    def reset_spots
+      update(times_spotted: 0)
+    end
+
     def repair_feeding_data!
       # If data looks broken, fix it
       if times_fed_today > 3 || (last_fed_at.nil? && times_fed_today > 0)
