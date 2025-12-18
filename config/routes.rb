@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :cats do
     member do
       post :feed
+      post :reset_feeding
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

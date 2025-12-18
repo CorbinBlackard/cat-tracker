@@ -49,3 +49,8 @@
 		<span style="color: red;">(Missing!)</span>
 	<% end %>
 </p>
+<%= button_to "Reset Feeding", reset_feeding_cat_path(cat),
+	method: :post,
+	class: "btn btn-sm btn-outline-danger",
+	data: { confirm: "Reset #{cat.name}'s feeding data to zero?" }
+%>

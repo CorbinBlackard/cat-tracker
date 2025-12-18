@@ -67,6 +67,13 @@ class CatsController < ApplicationController
     end
   end
 
+  def reset_feeding
+    @cat = Cat.find(params[:id])
+    @cat.update(times_fed_today: 0, last_fed_at: nil)
+
+    redirect_to cats_path, notice: "#{@cat.name}'s feeding data has been reset!"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cat
