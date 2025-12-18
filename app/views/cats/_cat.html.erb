@@ -1,25 +1,51 @@
 <div>
 	<h3><%= cat.name %></h3>
+	
 	<p>
 		<strong>Color:</strong> <%= cat.color %> | 
 		<strong>Location:</strong> <%= cat.location %>
-		<br>
-		<strong>Temperament:</strong> <%= cat.temperament %> |
-		<strong>Pattern:</strong> <%= cat.pattern %> 
-		<br>
-		<strong>Community Notes:</strong> <%= cat.notes %>
 	</p>
 	
-	<!-- Simple feeding status -->
-	<% cat.reset_daily_count_if_needed %>
-	<p> Fed: <%= cat.times_fed_today%>/3 </p>
-	<% if !cat.can_be_fed_today? %>
-		<p>⛔ <strong>Fed 3/3 times today</strong></p>
-	<% elsif cat.needs_feeding? %>
-		<p>⚠️ <strong>Needs food!</strong> Last fed: <%= cat.time_since_last_fed %></p>
-		<%= button_to "Feed Now", feed_cat_path(cat), method: :post %>
-	<% else %>
-		<p>✅ <strong>Fed:</strong> <%= cat.time_since_last_fed %></p>
-		<%= button_to "Feed Again", feed_cat_path(cat), method: :post %>
+	<p>
+		<strong>Temperament:</strong> <%= cat.temperament %> |
+		<strong>Pattern:</strong> <%= cat.pattern %> 
+	</p>
+	
+	<% if cat.notes.present? %>
+		<p><strong>Community Notes:</strong> <%= cat.notes %></p>
 	<% end %>
+	
+	<% if cat.favorite_food.present? %>
+		<p><strong>🍗 Favorite Food:</strong> <%= cat.favorite_food %></p>
+	<%else%>
+		<em> Favorite food as not been set </em>
+	<% end %>
+	
+	<!-- FEEDING STATUS SECTION -->
+	<div style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
+		<% cat.reset_daily_count_if_needed %>
+		<p><strong>Feeding Status:</strong> <%= cat.times_fed_today %>/3 today</p>
+		
+		<% if !cat.can_be_fed_today? %>
+			<p style="color: #dc3545;">⛔ <strong>Daily limit reached!</strong></p>
+		<% elsif cat.needs_feeding? %>
+			<p style="color: #ffc107;">⚠️ <strong>Needs food!</strong> Last fed: <%= cat.time_since_last_fed %></p>
+			<%= button_to "Feed Now", feed_cat_path(cat), method: :post, style: "background: #ffc107; color: black;" %>
+		<% else %>
+			<p style="color: #28a745;">✅ <strong>Fed:</strong> <%= cat.time_since_last_fed %></p>
+			<%= button_to "Feed Again", feed_cat_path(cat), method: :post, style: "background: #28a745; color: white;" %>
+		<% end %>
+	</div>
 </div>
+<br>
+<p>
+	<strong>👀 Last Seen:</strong> 
+	<%= time_ago_in_words(cat.last_seen) %> ago
+	<% if cat.last_seen > 7.days.ago %>
+		<span style="color: green;">(Recently)</span>
+	<% elsif cat.last_seen > 30.days.ago %>
+		<span style="color: orange;">(A while ago)</span>
+	<% else %>
+		<span style="color: red;">(Missing!)</span>
+	<% end %>
+</p>

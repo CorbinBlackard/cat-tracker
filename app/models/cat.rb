@@ -29,6 +29,9 @@ class Cat < ApplicationRecord
         length: { maximum: 500, too_long: "Notes are too long (max 500 characters)" },
         allow_blank: true
 
+    validates :favorite_food,
+        length: { minimum: 2, too_short: "Food must be at least 2 characters" }
+
 
     def needs_feeding?
         last_fed_at.nil? || last_fed_at < 6.hours.ago

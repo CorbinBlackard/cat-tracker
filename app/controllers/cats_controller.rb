@@ -75,6 +75,6 @@ class CatsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cat_params
-      params.expect(cat: [ :name, :color, :pattern, :temperament, :location, :last_seen, :notes ])
+      params.expect(cat: [ :name, :color, :pattern, :temperament, :location, :last_seen, :notes, :favorite_food ])
     end
 end

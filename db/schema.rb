@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_17_222842) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_18_010032) do
   create_table "cats", force: :cascade do |t|
     t.string "name"
     t.string "color"
@@ -23,5 +23,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_17_222842) do
     t.datetime "updated_at", null: false
     t.datetime "last_fed_at"
     t.integer "times_fed_today", default: 0
+    t.string "favorite_food"
   end
 end
