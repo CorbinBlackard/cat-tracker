@@ -16,45 +16,45 @@
 		<% @top_cats.each do |cat| %>
 			<div class="col-md-4">
 				<div class="card mb-3">
-				<div class="card-body">
-					<h5 class="card-title"><%= cat.name %></h5>
-					<p class="card-text">
-						<strong>Spotted:</strong> <%= cat.times_spotted %> times<br>
-						<strong>Color:</strong> <%= cat.color %><br>
-						<strong>Last seen:</strong> <%= time_ago_in_words(cat.last_seen) %> ago
-					</p>
-					<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
-				</div>
+					<div class="card-body">
+						<h5 class="card-title"><%= cat.name %></h5>
+						<p class="card-text">
+							<strong>Spotted:</strong> <%= cat.times_spotted %> times<br>
+							<strong>Color:</strong> <%= cat.color %><br>
+							<strong>Last seen:</strong> <%= time_ago_in_words(cat.last_seen) %> ago
+						</p>
+						<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
+						<%= button_to "Reset sightings", reset_spots_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-danger", style: "margin-top: 5px" %>
+					</div>
 				</div>
 			</div>
 		<% end %>
 	</div>
 
 	<div class="row mt-5">
-	<div class="col-md-6">
-		<h3>Recently Spotted</h3>
-		<ul class="list-group">
-			<% Cat.order(last_seen: :desc).limit(5).each do |cat| %>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				<div>
-					<strong><%= cat.name %></strong> - 
-					<%= cat.color %> <%= cat.pattern %>
-					<br>
-					<small class="text-muted">
-						Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
-					</small>
-					<small> 
-						<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-info", form: {style: "padding: 1px 5px; font-size: 0.8rem;"}%> 
-						Spotted <%= cat.times_spotted %> times
-						<%= button_to "Reset sightings", reset_spots_cat_path(cat), method: :post%>
-					</small>
-					
-				</div>
-				<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
-			</li>
-			<% end %>
-		</ul>
-	</div>
+		<div class="col-md-6">
+			<h3>Recently Spotted</h3>
+			<ul class="list-group">
+				<% Cat.order(last_seen: :desc).limit(5).each do |cat| %>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<div>
+						<strong><%= cat.name %></strong> - 
+						<%= cat.color %> <%= cat.pattern %>
+						<br>
+						<small class="text-muted">
+							Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
+						</small>
+						<small> 
+							<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-info", form: {style: "padding: 1px 5px; font-size: 0.8rem;"}%> 
+							Spotted <%= cat.times_spotted %> times
+						</small>
+						
+					</div>
+					<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
       
       <div class="col-md-6">
          <h3>How It Works</h3>
