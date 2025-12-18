@@ -1,7 +1,14 @@
 <div>
 	<h3><%= cat.name %></h3>
-	<p><strong>Color:</strong> <%= cat.color %> | 
-		<strong>Location:</strong> <%= cat.location %></p>
+	<p>
+		<strong>Color:</strong> <%= cat.color %> | 
+		<strong>Location:</strong> <%= cat.location %>
+		<br>
+		<strong>Temperament:</strong> <%= cat.temperament %> |
+		<strong>Pattern:</strong> <%= cat.pattern %> 
+		<br>
+		<strong>Community Notes:</strong> <%= cat.notes %>
+	</p>
 	
 	<!-- Simple feeding status -->
 	<% cat.reset_daily_count_if_needed %>

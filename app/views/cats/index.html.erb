@@ -7,10 +7,10 @@
 
 	<div class="alert alert-info mb-4">
 		<h4>Community Feeding Status</h4>
-		<% hungy = @cats.count(&:needs_feeding?)%>
+		<% hungry = @cats.count(&:needs_feeding?)%>
 		<% limit_reach = @cats.count { |c| !c.can_be_fed_today? }%>
 
-		<% if hungy > 0 %>
+		<% if hungry > 0 %>
 			<p><strong><%= hungry %> cat(s) need feeding right now!</strong></p>
 		<% else %>
 			<p><strong> All cats are fed! </strong></p>
