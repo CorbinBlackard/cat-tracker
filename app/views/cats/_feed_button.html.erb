@@ -1,0 +1,6 @@
+<% if cat.can_be_fed_today?%>
+	<%= button_to "FEED", feed_cat_path(cat),
+		method: :post,
+		class: "btn btn-sm btn-outline-success",
+		data: { confirm: "Mark #{cat.name} as fed?" }%>
+<% end %>

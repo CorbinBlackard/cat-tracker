@@ -1,0 +1,14 @@
+<% cat.reset_daily_count_if_needed %>
+
+<div class="feeding-status">
+	<% if !cat.can_be_fed_today? %>
+		<span class="badge bg-danger"> Limit Reached </span>
+	<% elsif cat.needs_feeding? %>
+		<span class="badge bg-warning"> Needs Food </span>
+	<% else %>
+		<span class="badge bg-success"> Fed <%= cat.time_since_last_fed%> </span>
+	<% end %>
+	<small class="text-muted">
+		(<%= cat.times_fed_today %>/3 today)
+	</small>
+</div>

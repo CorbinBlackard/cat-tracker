@@ -1,14 +1,27 @@
-/* @import "bootstrap"; */
-
-.cat_card {
-	margin-right: 10rem;
-	border: solid black;
-	text-align: center;
-	margin-left: 10rem;
-	border-radius: 3rem;
-	margin-bottom: 2rem;
+/* Add to your CSS file */
+.cat-card {
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	transition: box-shadow 0.3s;
 }
 
-.cat_details {
-	text-align: center;
+.cat-card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cat-card .card-body {
+	padding: 1.25rem;
+}
+
+.feeding-status {
+	border-left: 4px solid #6c757d;
+	padding-left: 10px;
+}
+
+/* Responsive grid */
+@media (max-width: 768px) {
+	.col-md-6 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
 }

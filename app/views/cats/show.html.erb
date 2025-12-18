@@ -9,32 +9,4 @@
 	<%= button_to "Destroy this cat", @cat, method: :delete %>
 </div>
 
-<% @cat.reset_daily_count_if_needed %>
 
-<% if @cat.can_be_fed_today? %>
-	<% if @cat.needs_feeding? %>
-		<!-- HUNGRY CAT: Show feeding button -->
-		<div style="background: #fff3cd; padding: 15px; border: 1px solid #ffc107;">
-			<h3>⚠️ <%= @cat.name %> Needs Feeding!</h3>
-			<p>Last fed: <strong><%= @cat.time_since_last_fed %></strong></p>
-			<p>Fed today: <%= @cat.times_fed_today %>/3 times</p>
-			<%= button_to "✅ Feed Now", feed_cat_path(@cat), method: :post %>
-		</div>
-	<% else %>
-		<!-- NOT HUNGRY but can still be fed -->
-		<div style="background: #d1ecf1; padding: 15px; border: 1px solid #0dcaf0;">
-			<h3>✅ <%= @cat.name %> is Fed</h3>
-			<p>Last fed: <strong><%= @cat.time_since_last_fed %></strong></p>
-			<p>Fed today: <%= @cat.times_fed_today %>/3 times</p>
-			<%= button_to "🔄 Mark as Fed Again", feed_cat_path(@cat), method: :post %>
-		</div>
-	<% end %>
-	<% else %>
-	<!-- DAILY LIMIT REACHED -->
-	<div style="background: #f8d7da; padding: 15px; border: 1px solid #f5c6cb;">
-		<h3>⛔ Daily Limit Reached</h3>
-		<p><strong><%= @cat.name %> has been fed 3 times today!</strong></p>
-		<p>Last fed: <strong><%= @cat.time_since_last_fed %></strong></p>
-		<p><small>Daily limit: 3 feeds per cat. Resets at midnight.</small></p>
-	</div>
-<% end %>

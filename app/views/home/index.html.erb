@@ -1,126 +1,50 @@
 <div class="container mt-5">
-<div class="jumbotron text-center">
-	<h1 class="display-4">🐱 Cat Tracker</h1>
-	<p class="lead">Track and care for stray cats at your apartment complex</p>
-	<hr class="my-4">
-	<p>Currently tracking <strong><%= Cat.count %></strong> cats in the system</p>
-	<h3> Spot a cat? </h3>
-	<div class="mt-4">
-		<%= link_to "View All Cats", cats_path, class: "btn btn-primary btn-lg mr-3" %>
-		<%= link_to "Add New Cat", new_cat_path, class: "btn btn-success btn-lg" %>
-	</div>
-</div>
+   <div class="jumbotron text-center">
+      <h1 class="display-4">🐱 Cat Tracker</h1>
+      <p class="lead">Track and care for stray cats at your apartment complex</p>
+      <hr class="my-4">
+      <p>Currently tracking <strong><%= Cat.count %></strong> cats in the system</p>
+      <h3> Spot a cat? </h3>
+      <div class="mt-4">
+         <%= link_to "View All Cats", cats_path, class: "btn btn-primary btn-lg mr-3" %>
+         <%= link_to "Add New Cat", new_cat_path, class: "btn btn-success btn-lg" %>
+      </div>
+   </div>
 
-<div class="row mt-5">
+	<div class="row mt-5">
 	<div class="col-md-6">
 		<h3>Recently Spotted</h3>
 		<ul class="list-group">
-		<% Cat.order(last_seen: :desc).limit(5).each do |cat| %>
-			<li class="list-group-item">
-				<div class="d-flex justify-content-between align-items-start">
+			<% Cat.order(last_seen: :desc).limit(5).each do |cat| %>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
 				<div>
 					<strong><%= cat.name %></strong> - 
 					<%= cat.color %> <%= cat.pattern %>
 					<br>
 					<small class="text-muted">
-						Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
+					Last seen: <%= time_ago_in_words(cat.last_seen) %> ago at <%= cat.location %>
 					</small>
-					
-					<!-- FEEDING STATUS BADGE -->
-					<div class="mt-2">
-						<% cat.reset_daily_count_if_needed %>
-						<% if !cat.can_be_fed_today? %>
-						<span class="badge bg-danger">⛔ Limit Reached</span>
-						<% elsif cat.needs_feeding? %>
-						<span class="badge bg-warning">⚠️ Needs Food</span>
-						<% else %>
-						<span class="badge bg-success">✅ Fed <%= cat.time_since_last_fed %></span>
-						<% end %>
-						<small class="text-muted ms-2">
-						(<%= cat.times_fed_today %>/3 today)
-						</small>
-					</div>
 				</div>
-				
-				<div class="btn-group-vertical" role="group">
-					<%= link_to "View", cat_path(cat), class: "btn btn-sm btn-outline-primary mb-1" %>
-					<% if cat.can_be_fed_today? %>
-						<%= button_to "Feed", feed_cat_path(cat), 
-							method: :post, 
-							class: "btn btn-sm btn-outline-success",
-							form: { class: "d-inline" },
-							data: { confirm: "Mark #{cat.name} as fed?" } %>
-					<% end %>
-				</div>
-				</div>
+				<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
 			</li>
-		<% end %>
+			<% end %>
 		</ul>
 	</div>
-	
-	<div class="col-md-6">
-		<!-- FEEDING SUMMARY BOX -->
-		<h3>Feeding Status</h3>
-		<div class="card mb-4">
-		<div class="card-body">
-			<h5 class="card-title">🍽️ Today's Feeding Summary</h5>
-			
-			<% hungry_cats = Cat.all.select(&:needs_feeding?) %>
-			<% fed_limit_cats = Cat.all.reject(&:can_be_fed_today?) %>
-			
-			<% if hungry_cats.any? %>
-				<div class="alert alert-warning">
-				<strong>Cats needing food:</strong>
-				<ul class="mb-0">
-					<% hungry_cats.each do |cat| %>
-						<li>
-						<%= cat.name %> - Last fed: <%= cat.time_since_last_fed %>
-						<%= link_to "Feed now", cat_path(cat), class: "btn btn-sm btn-warning ms-2" %>
-						</li>
-					<% end %>
-				</ul>
-				</div>
-			<% else %>
-				<div class="alert alert-success">
-				<strong>✅ All cats are fed!</strong>
-				<p class="mb-0">No cats currently need feeding.</p>
-				</div>
-			<% end %>
-			
-			<% if fed_limit_cats.any? %>
-				<div class="alert alert-info mt-3">
-				<strong>📊 Daily Limits Reached:</strong>
-				<p class="mb-1">These cats have been fed 3 times today:</p>
-				<ul class="mb-0">
-					<% fed_limit_cats.each do |cat| %>
-						<li><%= cat.name %> - Fed <%= cat.times_fed_today %>/3 times</li>
-					<% end %>
-				</ul>
-				</div>
-			<% end %>
-			
-			<div class="mt-3">
-				<small class="text-muted">
-				<i class="bi bi-info-circle"></i>
-				Daily limit: 3 feeds per cat. Resets at midnight.
-				</small>
-			</div>
-		</div>
-		</div>
-		
-		<h3>How It Works</h3>
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Community Cat Tracking</h5>
-			<ol>
-				<li>Add stray cats you spot around your complex</li>
-				<li>Record when and where you saw them</li>
-				<li>Share names and notes with neighbors</li>
-				<li>Help coordinate feeding and care</li>
-			</ol>
-			<p class="text-muted">Perfect for apartment communities with friendly strays!</p>
-		</div>
-		</div>
-	</div>
-</div>
+      
+      <div class="col-md-6">
+         <h3>How It Works</h3>
+         <div class="card">
+         <div class="card-body">
+            <h5 class="card-title">Community Cat Tracking</h5>
+            <ol>
+               <li>Add stray cats you spot around your complex</li>
+               <li>Record when and where you saw them</li>
+               <li>Share names and notes with neighbors</li>
+               <li>Help coordinate feeding and care</li>
+            </ol>
+            <p class="text-muted">Perfect for apartment communities with friendly strays!</p>
+         </div>
+         </div>
+      </div>
+   </div>
 </div>

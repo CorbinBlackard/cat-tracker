@@ -1,38 +1,18 @@
-<div class="cat_details">
-	<div id="<%= dom_id cat %>">
-		<p>
-			<%# <strong>Name:</strong> %>
-			<h2><%= cat.name %></h2>
-		</p>
-
-		<p>
-			<strong>Color:</strong>
-			<%= cat.color %>
-		</p>
-
-		<p>
-			<strong>Pattern:</strong>
-			<%= cat.pattern %>
-		</p>
-
-		<p>
-			<strong>Temperament:</strong>
-			<%= cat.temperament %>
-		</p>
-
-		<p>
-			<strong>Location:</strong>
-			<%= cat.location %>
-		</p>
-
-		<p>
-			<strong>Last seen:</strong>
-			<%= cat.last_seen %>
-		</p>
-
-		<p>
-			<strong>Notes:</strong>
-			<%= cat.notes %>
-		</p>
-	</div>
+<div>
+	<h3><%= cat.name %></h3>
+	<p><strong>Color:</strong> <%= cat.color %> | 
+		<strong>Location:</strong> <%= cat.location %></p>
+	
+	<!-- Simple feeding status -->
+	<% cat.reset_daily_count_if_needed %>
+	<p> Fed: <%= cat.times_fed_today%>/3 </p>
+	<% if !cat.can_be_fed_today? %>
+		<p>⛔ <strong>Fed 3/3 times today</strong></p>
+	<% elsif cat.needs_feeding? %>
+		<p>⚠️ <strong>Needs food!</strong> Last fed: <%= cat.time_since_last_fed %></p>
+		<%= button_to "Feed Now", feed_cat_path(cat), method: :post %>
+	<% else %>
+		<p>✅ <strong>Fed:</strong> <%= cat.time_since_last_fed %></p>
+		<%= button_to "Feed Again", feed_cat_path(cat), method: :post %>
+	<% end %>
 </div>
