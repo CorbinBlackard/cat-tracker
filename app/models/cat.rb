@@ -33,6 +33,17 @@ class Cat < ApplicationRecord
         length: { minimum: 2, too_short: "Food must be at least 2 characters" }
 
 
+    def repair_feeding_data!
+      # If data looks broken, fix it
+      if times_fed_today > 3 || (last_fed_at.nil? && times_fed_today > 0)
+        update(
+          times_fed_today: 0,
+          last_fed_at: nil
+        )
+        puts "Repaired #{name}'s feeding data"
+      end
+    end
+
     def needs_feeding?
         last_fed_at.nil? || last_fed_at < 6.hours.ago
     end
@@ -63,9 +74,16 @@ class Cat < ApplicationRecord
     end
 
     def reset_daily_count_if_needed
-        if last_fed_at.nil? || last_fed_at.to_date < Date.today
-            update(times_fed_today: 0)
-        end
+      # Always reset if times_fed_today is 3 and it's a new day
+      if times_fed_today >= 3 && (last_fed_at.nil? || last_fed_at < 24.hours.ago)
+        update(times_fed_at: 0)
+        true
+      elsif last_fed_at.nil? || last_fed_at < 24.hours.ago
+        update(times_fed_today: 0)
+        true
+      else
+        false
+      end
     end
 
     def can_be_fed_today?
@@ -79,17 +97,18 @@ class Cat < ApplicationRecord
     end
 
     def feed!
-        reset_daily_count_if_needed
+      # ALWAYS reset if needed before checking
+      reset_daily_count_if_needed
 
-        if times_fed_today >= 3
-            errors.add(:base, "#{name} has already been fed 3 times today!")
-            return false
-        end
+      if times_fed_today >= 3
+        errors.add(:base, "#{name} has already been fed 3 times today!")
+        return false
+      end
 
-        update(
-            last_fed_at: Time.now,
-            times_fed_today: (last_fed_at&.today? ? times_fed_today + 1 : 1)
-        )
+      update(
+        last_fed_at: Time.now,
+        times_fed_today: times_fed_today + 1
+      )
     end
 
     def reset_daily_count
