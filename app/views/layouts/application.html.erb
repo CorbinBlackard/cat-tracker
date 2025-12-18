@@ -29,8 +29,42 @@
 		document.addEventListener("turbo:render", () => {
 			const scrollY = localStorage.getItem("scrollPosition");
 			if (scrollY !== null) {
+				// Create a thin progress bar at top
+				const progressBar = document.createElement('div');
+				progressBar.style.cssText = `
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 0%;
+				height: 3px;
+				background: linear-gradient(90deg, #3498db, #2ecc71);
+				z-index: 9999;
+				transition: width 0.5s ease;
+				`;
+				document.body.appendChild(progressBar);
+				
+				// Start progress bar
 				requestAnimationFrame(() => {
-				window.scrollTo(0, parseInt(scrollY));
+				progressBar.style.width = '100%';
+				});
+				
+				// Scroll and remove progress bar
+				requestAnimationFrame(() => {
+				window.scrollTo({
+					top: parseInt(scrollY),
+					behavior: 'smooth' // Optional: adds smooth scrolling
+				});
+				
+				// Remove progress bar after animation
+				setTimeout(() => {
+					progressBar.style.opacity = '0';
+					setTimeout(() => {
+						if (progressBar.parentNode) {
+						progressBar.parentNode.removeChild(progressBar);
+						}
+					}, 500);
+				}, 600);
+				
 				localStorage.removeItem("scrollPosition");
 				});
 			}
