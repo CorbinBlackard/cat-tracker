@@ -75,16 +75,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
-	<body class="body">
-		<header style="position: sticky; top: 0; padding: 20px; background-color: #f8f9fa; border-bottom: 1px solid #dee2e6; z-index: 1000; display: flex; justify-content: space-between; align-items: center;">
-			<a href="/" style="text-decoration: none; color: #333; font-size: 24px; font-weight: bold;">
-				🐈 🐾  | Home
-			</a>
-			<div>
-				<%= link_to "Add New Cat", new_cat_path, class: "btn btn-success" %>
-			</div>
-		</header>
-	<%= yield %>
-	</body>
+	<main>
+		<body class="body", style="padding-bottom: 70px;">
+			<%= render partial: "/layouts/header"%>
+			<%= yield %>
+			<%= render partial: "/layouts/footer"%>
+		</body>
+	</main>
 </html>
