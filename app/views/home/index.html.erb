@@ -51,7 +51,7 @@
 								<span class="spotted-count">Spotted <%= cat.times_spotted %> times</span>
 							</div>
 						</div>
-						<%= link_to "View Cat", cat_path(cat), class: "view-cat-btn" %>
+						<%= link_to "View #{cat.name}'s info", cat_path(cat), class: "view-cat-btn" %>
 					</li>
 				<% end %>
 			</ul>

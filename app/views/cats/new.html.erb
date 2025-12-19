@@ -1,8 +1,18 @@
 <% content_for :title, "New cat" %>
 
-<div class="container">
-	<h1>New cat</h1>
+<div class="edit-page">
+	<div class="edit-header">
+		<h1> Create a new Cat </h1>
+		<p class="edit-subtitle">Fill in details for a new cat you spotted!</p>
+	</div>
 
-	<%= render "form", cat: @cat %>
-
+	<div class="edit-container">
+		<div class="edit-form-container">
+			<%= render "form", cat: @cat %>
+		</div>
+		
+		<div class="edit-actions">
+			<%= link_to "Back to all cats", cats_path, class: "btn btn-outline-secondary" %>
+		</div>
+	</div>
 </div>
