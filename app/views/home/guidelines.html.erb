@@ -1,0 +1,123 @@
+<%# app/views/home/guidelines.html.erb %>
+
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-md-10 col-lg-8">
+			<div class="card shadow">
+			<div class="card-header bg-danger text-white">
+				<h1 class="h3 mb-0">🐱 Community Cat Feeding Guidelines</h1>
+			</div>
+			
+			<div class="card-body">
+				<div class="alert alert-info">
+					<h4 class="alert-heading">📋 Quick Summary</h4>
+					<p class="mb-0">Daily limit: <strong>3 feeds per cat</strong> • Feed only stray/community cats • Never force interaction</p>
+				</div>
+
+				<div class="row mt-4">
+					<div class="col-md-6">
+						<div class="guideline-section">
+							<h3 class="h5 text-primary">✅ DO</h3>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">✔️ Feed only 3 times daily per cat</li>
+								<li class="list-group-item">✔️ Use dry kibble or wet cat food</li>
+								<li class="list-group-item">✔️ Provide fresh water daily</li>
+								<li class="list-group-item">✔️ Feed in consistent locations</li>
+								<li class="list-group-item">✔️ Note feeding times in the app</li>
+								<li class="list-group-item">✔️ Watch for health issues</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="guideline-section">
+							<h3 class="h5 text-danger">❌ DON'T</h3>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">✖️ Don't overfeed (max 3x/day)</li>
+								<li class="list-group-item">✖️ Don't feed human food</li>
+								<li class="list-group-item">✖️ Don't force cats to eat</li>
+								<li class="list-group-item">✖️ Don't feed sick/injured cats (call animal control)</li>
+								<li class="list-group-item">✖️ Don't create feeding stations near roads</li>
+								<li class="list-group-item">✖️ Don't touch without permission</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="guideline-section mt-5">
+					<h3 class="h4 text-success">🏆 Best Practices</h3>
+					<div class="row">
+						<div class="col-md-4 mb-3">
+							<div class="text-center p-3 border rounded h-100">
+								<div class="display-4">⏰</div>
+								<h5>Consistent Timing</h5>
+								<p class="small">Feed around the same time each day</p>
+							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<div class="text-center p-3 border rounded h-100">
+								<div class="display-4">📍</div>
+								<h5>Safe Locations</h5>
+								<p class="small">Choose quiet, sheltered feeding spots</p>
+							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<div class="text-center p-3 border rounded h-100">
+								<div class="display-4">📝</div>
+								<h5>Track Everything</h5>
+								<p class="small">Log feedings and sightings in the app</p>
+							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<div class="text-center p-3 border rounded h-100">
+								<div class="display-4">😻✋</div>
+								<h5>Lots of Scratches</h5>
+								<p class="small">Let the community know the best spots to scratch!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<%# <div class="alert alert-warning mt-4">
+					<h4 class="alert-heading">⚠️ Emergency Contacts</h4>
+					<ul class="mb-0">
+					<li><strong>Sick/Injured Cat:</strong> Local Animal Control: (555) 123-4567</li>
+					<li><strong>Animal Rescue:</strong> Paws & Claws Rescue: (555) 987-6543</li>
+					<li><strong>24hr Vet:</strong> Emergency Pet Hospital: (555) 456-7890</li>
+					</ul>
+				</div> %>
+
+				<div class="text-center mt-4">
+					<%= link_to "← Back to Home", root_path, class: "btn btn-outline-primary" %>
+					<%= link_to "View All Cats", cats_path, class: "btn btn-primary ms-2" %>
+				</div>
+			</div>
+			
+			<div class="card-footer text-muted text-center small">
+				Last updated: <%= Time.current.strftime("%B %d, %Y") %> • Cat Tracker Community
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.guideline-section {
+	margin-bottom: 2rem;
+	}
+
+	.guideline-section h3 {
+	border-bottom: 2px solid;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1rem;
+	}
+
+	.list-group-item {
+	border: none;
+	padding: 0.75rem 0.5rem;
+	}
+
+	.list-group-item:before {
+	margin-right: 10px;
+	}
+</style>

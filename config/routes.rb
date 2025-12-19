@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
+  get "/home/guidelines", as: :guidelines
   resources :cats do
     member do
       post :feed
