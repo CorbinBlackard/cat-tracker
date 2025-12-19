@@ -19,14 +19,14 @@
 					<div class="cat-card-body">
 						<h5 class="cat-name"><%= cat.name %></h5>
 						<div class="cat-details">
-							<p><strong>Spotted:</strong> <%= cat.times_spotted %> times</p>
+							<p><strong>Spotted:</strong> <%= cat.times_spotted %> times today</p>
 							<p><strong>Color:</strong> <%= cat.color %></p>
 							<p><strong>Last seen:</strong> <%= time_ago_in_words(cat.last_seen) %> ago</p>
 						</div>
-						<div class="cat-actions">
-							<%= link_to "View Cat", cat_path(cat), class: "btn btn-sm btn-outline-primary" %>
-							<%= button_to "Reset sightings", reset_spots_cat_path(cat), method: :post, class: "btn btn-sm btn-outline-danger reset-btn" %>
-						</div>
+						<div class="cat-spotted-info">
+								<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "spotted-btn" %> 
+								<span class="spotted-count">Spotted <%= cat.times_spotted %> times</span>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -35,9 +35,9 @@
 
 	<div class="recent-section">
 		<div class="recent-cats">
-			<h3 class="section-title">Recently Spotted</h3>
+			<h3 class="section-title">Cat Profiles</h3>
 			<ul class="cats-list">
-				<% Cat.order(last_seen: :desc).limit(5).each do |cat| %>
+				<% Cat.order(created_at: :desc).limit(5).each do |cat| %>
 					<li class="cats-list-item">
 						<div class="cat-info">
 							<strong class="cat-info-name"><%= cat.name %></strong> - 
