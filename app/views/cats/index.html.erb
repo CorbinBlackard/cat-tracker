@@ -26,9 +26,9 @@
 			<div class="col-md-6 col-lg-4 mb-4">
 				<div class="cat-card card h-100">
 					<div class="card-body">
-						<%= render cat %>
+						<%= render partial: 'showcat', locals: { cat: cat } %>
 						<div class="mt-3">
-							<%= link_to "Feeding Details", cat, class: "btn btn-primary" %>
+							<%= link_to "View Cat", cat, class: "btn btn-primary" %>
 							<%= link_to "Edit", edit_cat_path(cat), class: "btn btn-outline-secondary" %>
 						</div>
 					</div>

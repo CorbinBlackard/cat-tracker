@@ -1,27 +1,526 @@
-/* Add to your CSS file */
-.cat-card {
-	border: 1px solid #dee2e6;
-	border-radius: 8px;
-	transition: box-shadow 0.3s;
-}
+/* CAT TRACKER CSS - CONDENSED */
 
-.cat-card:hover {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.cat-card .card-body {
-	padding: 1.25rem;
-}
-
-.feeding-status {
-	border-left: 4px solid #6c757d;
-	padding-left: 10px;
-}
-
-/* Responsive grid */
+/* ===== GLOBAL & RESPONSIVE ===== */
 @media (max-width: 768px) {
 	.col-md-6 {
 		flex: 0 0 100%;
 		max-width: 100%;
+	}
+}
+
+/* ===== CARD COMPONENTS ===== */
+.cat-card {
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	background: white;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, box-shadow 0.2s;
+	height: 100%;
+}
+
+.cat-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cat-card .card-body,
+.cat-card-body {
+	padding: 1.25rem;
+}
+
+.cat-card-container {
+	margin-bottom: 1rem;
+}
+
+/* ===== HOME PAGE ===== */
+.home-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.home-hero {
+	background: #f8f9fa;
+	border-radius: 10px;
+	padding: 3rem 2rem;
+	margin: 2rem 0;
+	text-align: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-title {
+	font-size: 3.5rem;
+	font-weight: 300;
+	color: #2c3e50;
+	margin-bottom: 1rem;
+}
+
+.home-lead {
+	font-size: 1.5rem;
+	color: #6c757d;
+	margin-bottom: 1.5rem;
+}
+
+.home-divider {
+	width: 80px;
+	height: 3px;
+	background: #3498db;
+	border: none;
+	margin: 1.5rem auto;
+}
+
+.home-stats {
+	font-size: 1.2rem;
+	color: #495057;
+	margin-bottom: 1.5rem;
+}
+
+.home-stats strong {
+	color: #e74c3c;
+}
+
+.home-subtitle {
+	font-size: 1.8rem;
+	color: #2c3e50;
+	margin: 2rem 0 1.5rem;
+}
+
+.home-actions {
+	margin-top: 2rem;
+}
+
+.section-title {
+	font-size: 2rem;
+	color: #2c3e50;
+	margin: 3rem 0 1.5rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid #3498db;
+}
+
+.cats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 3rem;
+}
+
+.cat-name {
+	font-size: 1.5rem;
+	color: #2c3e50;
+	margin-bottom: 1rem;
+	font-weight: 600;
+}
+
+.cat-details p {
+	margin-bottom: 0.5rem;
+	color: #495057;
+	font-size: 0.95rem;
+}
+
+.cat-details strong {
+	color: #2c3e50;
+}
+
+.cat-actions {
+	margin-top: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.reset-btn {
+	margin-top: 0.5rem;
+}
+
+.recent-section {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+	margin: 3rem 0;
+}
+
+@media (min-width: 768px) {
+	.recent-section {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.cats-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cats-list-item {
+	background: white;
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	transition: border-color 0.2s;
+}
+
+.cats-list-item:hover {
+	border-color: #3498db;
+}
+
+.cat-info {
+	flex: 1;
+}
+
+.cat-info-name {
+	color: #2c3e50;
+	font-size: 1.1rem;
+}
+
+.cat-info-color {
+	color: #6c757d;
+	font-size: 0.95rem;
+}
+
+.cat-last-seen {
+	color: #6c757d;
+	display: block;
+	margin: 0.5rem 0;
+	font-size: 0.85rem;
+}
+
+.cat-spotted-info {
+	margin-top: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.spotted-btn {
+	background: transparent;
+	border: 1px solid #17a2b8;
+	color: #17a2b8;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.spotted-btn:hover {
+	background: #17a2b8;
+	color: white;
+}
+
+.spotted-count {
+	color: #6c757d;
+	font-size: 0.85rem;
+}
+
+.view-cat-btn {
+	background: transparent;
+	border: 1px solid #3498db;
+	color: #3498db;
+	padding: 0.375rem 0.75rem;
+	border-radius: 4px;
+	font-size: 0.875rem;
+	transition: all 0.2s;
+	white-space: nowrap;
+	margin-left: 1rem;
+	text-decoration: none;
+}
+
+.view-cat-btn:hover {
+	background: #3498db;
+	color: white;
+	text-decoration: none;
+}
+
+.how-it-works {
+	margin-top: 0;
+}
+
+.info-card {
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border: 1px solid #dee2e6;
+}
+
+.info-card-body {
+	padding: 1.5rem;
+}
+
+.info-card-title {
+	font-size: 1.5rem;
+	color: #2c3e50;
+	margin-bottom: 1rem;
+}
+
+.steps-list {
+	padding-left: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.steps-list li {
+	margin-bottom: 0.75rem;
+	color: #495057;
+	line-height: 1.5;
+}
+
+.info-card-footer {
+	color: #6c757d;
+	font-style: italic;
+	margin-bottom: 0;
+	padding-top: 1rem;
+	border-top: 1px solid #e9ecef;
+}
+
+/* ===== CAT SHOW PAGE ===== */
+.cat-profile {
+	background: white;
+	border-radius: 10px;
+	padding: 2rem;
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.cat-name-large {
+	font-size: 2.5rem;
+	color: #2c3e50;
+	margin-bottom: 1.5rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 3px solid #3498db;
+	text-align: center;
+}
+
+.cat-basic-info,
+.cat-personality,
+.cat-notes,
+.cat-food {
+	margin-bottom: 1.5rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #eee;
+}
+
+.cat-basic-info p,
+.cat-personality p,
+.cat-notes p,
+.cat-food p {
+	margin: 0;
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+.info-label {
+	font-weight: 600;
+	color: #2c3e50;
+	margin-right: 0.5rem;
+}
+
+.info-value {
+	color: #495057;
+}
+
+.info-separator {
+	color: #adb5bd;
+	margin: 0 1rem;
+}
+
+.no-food {
+	color: #6c757d;
+	font-style: italic;
+}
+
+.feeding-section {
+	border-top: 2px solid #3498db;
+	padding: 1.5rem;
+	margin: 1.5rem 0;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.feeding-count {
+	font-size: 1.2rem;
+	margin-bottom: 1.5rem;
+}
+
+.feeding-number {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #e74c3c;
+	background: white;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	border: 2px solid #e74c3c;
+}
+
+.feeding-status {
+	margin: 1rem 0;
+	padding: 1rem;
+	border-radius: 6px;
+	border-left: 4px solid #6c757d;
+}
+
+.feeding-limit {
+	background: rgba(220, 53, 69, 0.1);
+	border: 1px solid rgba(220, 53, 69, 0.3);
+	color: #dc3545;
+}
+
+.feeding-needed {
+	background: rgba(255, 193, 7, 0.1);
+	border: 1px solid rgba(255, 193, 7, 0.3);
+	color: #856404;
+}
+
+.feeding-ok {
+	background: rgba(40, 167, 69, 0.1);
+	border: 1px solid rgba(40, 167, 69, 0.3);
+	color: #155724;
+}
+
+.feeding-status p {
+	margin-bottom: 1rem;
+	font-size: 1.1rem;
+}
+
+.feed-btn {
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+	display: inline-block;
+}
+
+.feed-now-btn {
+	background: #ffc107;
+	color: #212529;
+}
+
+.feed-now-btn:hover {
+	background: #e0a800;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.feed-again-btn {
+	background: #28a745;
+	color: white;
+}
+
+.feed-again-btn:hover {
+	background: #218838;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.last-seen-section {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	background: #f8f9fa;
+	border-radius: 6px;
+	border-left: 4px solid #3498db;
+}
+
+.last-seen-section p {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+.time-ago {
+	font-weight: 600;
+	color: #495057;
+}
+
+.recent-status {
+	font-weight: 600;
+	margin-left: 0.5rem;
+}
+
+.status-recent {
+	color: #28a745;
+}
+
+.status-awhile {
+	color: #fd7e14;
+}
+
+.status-missing {
+	color: #dc3545;
+}
+
+.reset-feeding-btn {
+	background: transparent;
+	border: 2px solid #dc3545;
+	color: #dc3545;
+	padding: 0.75rem 1.5rem;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+	display: inline-block;
+	margin-top: 1rem;
+}
+
+.reset-feeding-btn:hover {
+	background: #dc3545;
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+	.home-title {
+		font-size: 2.5rem;
+	}
+
+	.home-lead {
+		font-size: 1.25rem;
+	}
+
+	.cats-list-item {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.view-cat-btn {
+		margin-left: 0;
+		align-self: flex-start;
+	}
+
+	.cat-spotted-info {
+		flex-wrap: wrap;
+	}
+
+	.cat-profile {
+		padding: 1.5rem;
+		margin: 0 1rem;
+	}
+
+	.cat-name-large {
+		font-size: 2rem;
+	}
+
+	.info-separator {
+		display: block;
+		visibility: hidden;
+		height: 0.5rem;
+	}
+
+	.feeding-section,
+	.last-seen-section {
+		padding: 1rem;
+	}
+
+	.feed-btn,
+	.reset-feeding-btn {
+		width: 100%;
+		text-align: center;
 	}
 }

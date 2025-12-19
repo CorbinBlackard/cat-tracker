@@ -23,9 +23,9 @@ class CatsController < ApplicationController
    def feed
       @cat = Cat.find(params[:id])
       if @cat.feed!
-         redirect_to cats_path, notice: "#{@cat.name} has been fed! 🐟"
+         redirect_to @cat, notice: "#{@cat.name} has been fed! 🐟"
       else
-         redirect_to cats_path, alert: "Could not feed #{@cat.name}: #{@cat.errors.full_messages.join(', ')}"
+         redirect_to @cat, alert: "Could not feed #{@cat.name}: #{@cat.errors.full_messages.join(', ')}"
       end
    end
 
@@ -83,7 +83,7 @@ class CatsController < ApplicationController
       @cat = Cat.find(params[:id])
       @cat.update(times_fed_today: 0, last_fed_at: nil)
 
-      redirect_to cats_path, notice: "#{@cat.name}'s feeding data has been reset!"
+      redirect_to @cat, notice: "#{@cat.name}'s feeding data has been reset!"
    end
 
    private
