@@ -1,10 +1,10 @@
 # README
 
-# 🐱 Cat Tracker
+# Cat Tracker
 
 A community-driven web application for tracking and caring for stray cats in apartment complexes and neighborhoods. Neighbors can collaboratively monitor local cats, track feedings, and share sightings.
 
-## 🚀 Features
+## Features
 
 - **Cat Profiles**: Create detailed profiles for each community cat
 - **Feeding Tracker**: Limit 3 feeds per cat daily, track last fed time
@@ -13,7 +13,7 @@ A community-driven web application for tracking and caring for stray cats in apa
 - **Responsive Design**: Works on desktop and mobile devices
 - **No Login Required**: Simple, frictionless sharing for neighbors
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Ruby 3.4.1**
 - **Rails 8.0.4**
@@ -21,7 +21,7 @@ A community-driven web application for tracking and caring for stray cats in apa
 - **Turbo/Hotwire** - Modern frontend interactions
 - **SQLite** - Development database (production-ready for PostgreSQL)
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 
@@ -49,6 +49,7 @@ rails db:seed
 
 # Start the server
 rails server
+
 ```
 
 cats
