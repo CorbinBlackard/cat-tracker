@@ -51,6 +51,11 @@
 				<%= button_to "Feed Again", feed_cat_path(cat), method: :post, class: "feed-btn feed-again-btn" %>
 			</div>
 		<% end %>
+			<%= button_to "Reset Feeding", reset_feeding_cat_path(cat),
+		method: :post,
+		class: "reset-feeding-btn",
+		data: { confirm: "Reset #{cat.name}'s feeding data to zero?" }
+	%>
 	</div>
 	
 	<div class="last-seen-section">
@@ -66,10 +71,9 @@
 			<% end %>
 		</p>
 	</div>
-	
-	<%= button_to "Reset Feeding", reset_feeding_cat_path(cat),
-		method: :post,
-		class: "reset-feeding-btn",
-		data: { confirm: "Reset #{cat.name}'s feeding data to zero?" }
-	%>
+
+	<div class="cat_details">
+	<%= link_to "Edit #{cat.name} the Cat", edit_cat_path(@cat),class: "btn btn-primary"  %> | 
+	<%= link_to "Back to cats", cats_path, class: "btn btn-outline-secondary" %>
+</div>
 </div>

@@ -59,5 +59,7 @@
 <div class="form-actions">
 	<%= form.submit "Update Cat", class: "btn btn-success" %>
 	<%= link_to "Cancel", cat, class: "btn btn-outline-secondary" %>
+		<%= button_to "Delete #{cat.name}?", @cat, method: :delete, class: "btn btn-outline-danger destroy-btn" %>
+
 </div>
 <% end %>
