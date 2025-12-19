@@ -1,57 +1,63 @@
-<%= form_with(model: cat) do |form| %>
-	<% if cat.errors.any? %>
-		<div style="color: red">
-			<h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
+<%= form_with(model: cat, class: "cat-form") do |form| %>
+<% if cat.errors.any? %>
+	<div class="form-errors">
+		<h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
 
-			<ul>
-			<% cat.errors.each do |error| %>
-				<li><%= error.full_message %></li>
-			<% end %>
-			</ul>
-		</div>
-	<% end %>
+		<ul>
+		<% cat.errors.each do |error| %>
+		<li><%= error.full_message %></li>
+		<% end %>
+		</ul>
+	</div>
+<% end %>
 
-	<div>
-		<%= form.label :name, style: "display: block" %>
-		<%= form.text_field :name %>
+<div class="form-grid">
+	<div class="form-group">
+		<%= form.label :name, "Cat's Name" %>
+		<%= form.text_field :name, class: "form-control", placeholder: "e.g., Whiskers, Shadow, Mittens" %>
 	</div>
 
-	<div>
-		<%= form.label :color, style: "display: block" %>
-		<%= form.text_field :color %>
+	<div class="form-group">
+		<%= form.label :color, "Color" %>
+		<%= form.text_field :color, class: "form-control", placeholder: "e.g., Orange tabby, Black, Calico" %>
 	</div>
 
-	<div>
-		<%= form.label :pattern, style: "display: block" %>
-		<%= form.text_field :pattern %>
+	<div class="form-group">
+		<%= form.label :pattern, "Pattern (optional)" %>
+		<%= form.text_field :pattern, class: "form-control", placeholder: "e.g., Stripes, spots, solid" %>
 	</div>
 
-	<div>
-		<%= form.label :temperament, style: "display: block" %>
-		<%= form.text_field :temperament %>
+	<div class="form-group">
+		<%= form.label :temperament, "Temperament" %>
+		<%= form.select :temperament, 
+			['Friendly', 'Shy', 'Playful', 'Hungry', 'Scared', 'Skittish', 'Mysterious', 'Grumpy', 'Cuddly'], 
+			{ include_blank: "Select temperament" }, 
+			{ class: "form-control" } %>
 	</div>
 
-	<div>
-		<%= form.label :location, style: "display: block" %>
-		<%= form.text_field :location %>
+	<div class="form-group">
+		<%= form.label :location, "Last Seen Location" %>
+		<%= form.text_field :location, class: "form-control", placeholder: "e.g., Near dumpster, Under car, By pool" %>
 	</div>
 
-	<div>
-		<%= form.label :last_seen, style: "display: block" %>
-		<%= form.datetime_field :last_seen %>
+	<div class="form-group">
+		<%= form.label :last_seen, "Last Seen Date/Time" %>
+		<%= form.datetime_field :last_seen, class: "form-control" %>
 	</div>
 
-	<div>
-		<%= form.label :notes, style: "display: block" %>
-		<%= form.textarea :notes %>
+	<div class="form-group full-width">
+		<%= form.label :notes, "Community Notes (optional)" %>
+		<%= form.text_area :notes, class: "form-control", rows: 4, placeholder: "Any additional information about this cat..." %>
 	</div>
 
-	<div>
-		<%= form.label :favorite_food, style: "display: block"%>
-		<%= form.text_field :favorite_food, default: "Kibbles"%>
+	<div class="form-group">
+		<%= form.label :favorite_food, "Favorite Food" %>
+		<%= form.text_field :favorite_food, class: "form-control", placeholder: "e.g., Kibbles, Tuna, Chicken" %>
 	</div>
+</div>
 
-	<div>
-		<%= form.submit %>
-	</div>
+<div class="form-actions">
+	<%= form.submit "Update Cat", class: "btn btn-success" %>
+	<%= link_to "Cancel", cat, class: "btn btn-outline-secondary" %>
+</div>
 <% end %>

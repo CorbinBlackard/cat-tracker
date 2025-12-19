@@ -1,14 +1,19 @@
 <% content_for :title, "Editing cat" %>
 
-<div class="edit_details">
-	<h1>Editing cat</h1>
+<div class="edit-page">
+	<div class="edit-header">
+		<h1>Editing <%= @cat.name %></h1>
+		<p class="edit-subtitle">Update details for this community cat</p>
+	</div>
 
-	<%= render "form", cat: @cat %>
-
-	<br>
-
-	<div>
-	<%= link_to "Show this cat", @cat %> |
-	<%= link_to "Back to cats", cats_path %>
+	<div class="edit-container">
+		<div class="edit-form-container">
+			<%= render "form", cat: @cat %>
+		</div>
+		
+		<div class="edit-actions">
+			<%= link_to "Show this cat", @cat, class: "btn btn-primary" %>
+			<%= link_to "Back to cats", cats_path, class: "btn btn-outline-secondary" %>
+		</div>
 	</div>
 </div>
