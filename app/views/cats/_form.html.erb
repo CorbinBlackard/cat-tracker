@@ -1,4 +1,4 @@
-<%= form_with(model: cat, class: "cat-form") do |form| %>
+<%= form_with(model: cat, class: "cat-form", multiple: true) do |form| %>
 	<% if cat.errors.any? %>
 		<div class="form-errors">
 			<h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
@@ -53,6 +53,18 @@
 			<%= form.label :favorite_food, "Favorite Food" %>
 			<%= form.text_field :favorite_food, class: "form-control", placeholder: "e.g., Kibbles, Tuna, Chicken", value: "Kibbles" %>
 		</div>
+
+		<div class="form-group">
+			<%= form.label :photos, "Cat Photos" %>
+			<%= form.file_field :photos, 
+					multiple: true, 
+					class: "form-control", 
+					accept: "image/jpeg,image/png,image/gif,image/webp" %>
+			<small class="text-muted">
+				Accepts: JPEG, PNG, GIF, WebP. 
+				<strong>iPhone users:</strong> Go to Settings → Camera → Formats → Select "Most Compatible"
+			</small>
+		</div>
 	</div>
 
 	<div class="form-actions">
@@ -61,8 +73,8 @@
 			<%= form.submit "Update Cat", class: "btn btn-success" %>
 			<%= link_to "Cancel", cat, class: "btn btn-outline-secondary" %>
 			<%= link_to "Delete #{cat.name}", cat, 
-    class: "btn btn-outline-danger destroy-btn",
-    data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{cat.name}?" } %>
+				class: "btn btn-outline-danger destroy-btn",
+				data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{cat.name}?" } %>
 		<% else %>
 			<%# This shows for NEW mode %>
 			<%= form.submit "Create Cat", class: "btn btn-success" %>

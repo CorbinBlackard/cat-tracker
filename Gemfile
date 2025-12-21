@@ -62,3 +62,5 @@ group :test do
   gem "selenium-webdriver"
 end
 # gem "bootstrap", "~> 5.3"
+#
+gem "image_processing", "~> 1.2"

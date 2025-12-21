@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post :reset_feeding
       post :spotted
       post :reset_spots
+      post :add_photo
+      delete :remove_photo
     end
   end
   get "up" => "rails/health#show", as: :rails_health_check

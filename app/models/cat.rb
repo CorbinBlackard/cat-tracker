@@ -39,6 +39,9 @@ class Cat < ApplicationRecord
         message: "must be non-negative number"
       }, allow_blank: true
 
+  has_many_attached :photos
+  validate :validate_photos
+
   def spotted!
       update(times_spotted: times_spotted + 1)
       update(last_seen: Time.now)
@@ -128,5 +131,29 @@ class Cat < ApplicationRecord
 
   def reset_daily_count
       update(times_fed_today: 0)
+  end
+
+  private
+  # In app/models/cat.rb, update validate_photos:
+
+  def validate_photos
+    return unless photos.attached?
+
+    photos.each do |photo|
+      # Check size
+      if photo.blob.byte_size > 5.megabytes
+        errors.add(:photos, "#{photo.filename} is too large (max 5MB)")
+      end
+
+      # REJECT HEIC files
+      if photo.blob.content_type == "image/heic"
+        errors.add(:photos, "#{photo.filename} is HEIC format. Please convert to JPEG or PNG first.")
+      end
+
+      # Only accept browser-displayable formats
+      unless photo.blob.content_type.in?(%w[image/jpeg image/jpg image/png image/gif image/webp])
+        errors.add(:photos, "#{photo.filename} must be JPEG, PNG, GIF, or WebP")
+      end
+    end
   end
 end

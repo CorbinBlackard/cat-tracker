@@ -87,6 +87,22 @@ class CatsController < ApplicationController
     redirect_to @cat, notice: "#{@cat.name}'s feeding data has been reset!"
   end
 
+  def add_photo
+    @cat = Cat.find(params[:id])
+    if params[:photo]
+      @cat.photos.attach(params[:photo])
+      redirect_to @cat, notice: "Photo added successfully"
+    else
+      redirect_to @cat, notice: "Please select a photo first"
+    end
+  end
+
+  def remove_photo
+    @cat = Cat.find(params[:id])
+    @cat.photos.find(params[:photo_id]).purge
+    redirect_to @cat, notice: "Photo removed"
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_cat
@@ -96,7 +112,7 @@ class CatsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def cat_params
     params.require(:cat).permit(:name, :color, :pattern, :temperament, :location,
-                                :last_seen, :notes, :favorite_food, :times_spotted)
+                                :last_seen, :notes, :favorite_food, :times_spotted, photos: [])
     # FIXED: Changed .expect to .require and fixed the parameter structure
   end
 end
