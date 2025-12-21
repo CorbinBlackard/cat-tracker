@@ -74,51 +74,51 @@
 
 
 		<!-- Photos Section -->
-<div class="mt-5">
-  <h3>📸 Cat Photos <span class="badge bg-primary"><%= cat.photos.count %></span></h3>
-  
-  <% if cat.photos.attached? %>
-    <div class="row mt-3">
-      <% cat.photos.each do |photo| %>  <!-- This starts the photo loop -->
-        <div class="col-md-4 col-lg-3 mb-3">
-          <div class="card cat-photo-card">
-            <%= image_tag photo, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
-            <div class="card-body text-center">
-              <small class="text-muted d-block mb-2"><%= photo.filename %></small>
-              <%= button_to "Remove", 
-                    remove_photo_cat_path(cat, photo_id: photo.id), 
-                    method: :delete,
-                    class: "btn btn-sm btn-outline-danger",
-                    data: { turbo_confirm: "Remove this photo?" } %>
-            </div>
-          </div>
-        </div>
-      <% end %>  <!-- This ends the photo loop -->
-    </div>
-  <% else %>
-    <div class="alert alert-info">
-      <p class="mb-0">No photos yet. Be the first to add one!</p>
-    </div>
-  <% end %>
-</div>
+	<div class="mt-5">
+		<h3>📸 Cat Photos <span class="badge bg-primary"><%= cat.photos.count %></span></h3>
+		
+		<% if cat.photos.attached? %>
+			<div class="row mt-3">
+				<% cat.photos.each do |photo| %>  <!-- This starts the photo loop -->
+				<div class="col-md-4 col-lg-3 mb-3">
+					<div class="card cat-photo-card">
+						<%= image_tag photo, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+						<div class="card-body text-center">
+						<small class="text-muted d-block mb-2"><%= photo.filename %></small>
+						<%= button_to "Remove", 
+								remove_photo_cat_path(cat, photo_id: photo.id), 
+								method: :delete,
+								class: "btn btn-sm btn-outline-danger",
+								data: { turbo_confirm: "Remove this photo?" } %>
+						</div>
+					</div>
+				</div>
+				<% end %>  <!-- This ends the photo loop -->
+			</div>
+		<% else %>
+			<div class="alert alert-info">
+				<p class="mb-0">No photos yet. Be the first to add one!</p>
+			</div>
+		<% end %>
+	</div>
+å
 
-
-<!-- Add More Photos Form -->
-<div class="mt-4 p-3 bg-light rounded">
-  <h5>Add More Photos</h5>
-  <%= form_with url: add_photo_cat_path(cat), local: true do |f| %>
-    <div class="mb-2">
-      <%= f.file_field :photo, 
-            class: "form-control", 
-            accept: "image/*",
-            required: true %>
-    </div>
-    <%= f.submit "Upload Photo", class: "btn btn-primary" %>
-  <% end %>
-</div>
+	<!-- Add More Photos Form -->
+	<div class="mt-4 p-3 bg-light rounded">
+		<h5>Add More Photos</h5>
+		<%= form_with url: add_photo_cat_path(cat), local: true do |f| %>
+			<div class="mb-2">
+				<%= f.file_field :photo, 
+						class: "form-control", 
+						accept: "image/*",
+						required: true %>
+			</div>
+			<%= f.submit "Upload Photo", class: "btn btn-primary" %>
+		<% end %>
+	</div>
 
 	<div class="cat_details">
-	<%= link_to "Edit #{cat.name} the Cat", edit_cat_path(cat),class: "btn btn-primary"  %> | 
-	<%= link_to "Back to cats", cats_path, class: "btn btn-outline-secondary" %>
-</div>
+		<%= link_to "Edit #{cat.name} the Cat", edit_cat_path(cat),class: "btn btn-primary"  %> | 
+		<%= link_to "Back to cats", cats_path, class: "btn btn-outline-secondary" %>
+	</div>
 </div>
