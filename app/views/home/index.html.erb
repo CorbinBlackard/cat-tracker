@@ -24,9 +24,16 @@
 							<p><strong>Last seen:</strong> <%= time_ago_in_words(cat.last_seen) %> ago</p>
 						</div>
 						<div class="cat-spotted-info">
-								<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "spotted-btn" %> 
-								<span class="spotted-count">Spotted <%= cat.times_spotted %> times</span>
-							</div>
+							<%= button_to "Just Spotted", spotted_cat_path(cat), method: :post, class: "spotted-btn" %> 
+							<span class="spotted-count">Spotted <%= cat.times_spotted %> times</span>
+						</div>
+						<span>
+							<%= button_to "Reset Spottings", reset_spots_cat_path(cat), 
+								method: :post,
+								class: "btn btn-outline-danger",
+								data: { turbo_confirm: "Reset #{cat.name}'s spotting count to zero?" },
+								style: "margin-top: 10px" %> 
+						</span>
 					</div>
 				</div>
 			</div>
