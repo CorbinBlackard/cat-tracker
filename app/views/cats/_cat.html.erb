@@ -75,7 +75,7 @@
 
 		<!-- Photos Section -->
 	<div class="mt-5">
-		<h3>📸 Cat Photos <span class="badge bg-primary"><%= cat.photos.count %></span></h3>
+		<h3>📸 <%= cat.name %>'s Photos <span class="badge bg-secondary"><%= cat.photos.count %></span></h3>
 		
 		<% if cat.photos.attached? %>
 			<div class="row mt-3">
@@ -101,10 +101,9 @@
 			</div>
 		<% end %>
 	</div>
-å
 
 	<!-- Add More Photos Form -->
-	<div class="mt-4 p-3 bg-light rounded">
+	<div class="mt-4 p-3 bg-light rounded", style="margin-bottom: 25px">
 		<h5>Add More Photos</h5>
 		<%= form_with url: add_photo_cat_path(cat), local: true do |f| %>
 			<div class="mb-2">
