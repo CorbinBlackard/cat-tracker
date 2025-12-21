@@ -1,5 +1,5 @@
 <div class="cat-profile">
-	<h3 class="cat-name-large"><%= cat.name %></h3>
+	<h3 class="cat-name-large"><%= cat.name %>'s Profile</h3>
 	
 	<div class="cat-basic-info">
 		<p>
@@ -31,48 +31,6 @@
 		<% end %>
 	</div>
 	
-	<!-- FEEDING STATUS SECTION -->
-	<div class="feeding-section">
-		<% cat.reset_daily_count_if_needed %>
-		<p class="feeding-count"><span class="info-label">Feeding Status:</span> <span class="feeding-number"><%= cat.times_fed_today %>/3</span> today</p>
-		
-		<% if !cat.can_be_fed_today? %>
-			<div class="feeding-status feeding-limit">
-				<p>⛔ <strong>Daily limit reached!</strong></p>
-			</div>
-		<% elsif cat.needs_feeding? %>
-			<div class="feeding-status feeding-needed">
-				<p>⚠️ <strong>Needs food!</strong> Last fed: <span class="time-ago"><%= cat.time_since_last_fed %></span></p>
-				<%= button_to "Feed Now", feed_cat_path(cat), method: :post, class: "feed-btn feed-now-btn" %>
-			</div>
-		<% else %>
-			<div class="feeding-status feeding-ok">
-				<p>✅ <strong>Fed:</strong> <span class="time-ago"><%= cat.time_since_last_fed %></span></p>
-				<%= button_to "Feed Again", feed_cat_path(cat), method: :post, class: "feed-btn feed-again-btn" %>
-			</div>
-		<% end %>
-			<%= button_to "Reset Feeding", reset_feeding_cat_path(cat),
-		method: :post,
-		class: "reset-feeding-btn",
-		data: { confirm: "Reset #{cat.name}'s feeding data to zero?" }
-	%>
-	</div>
-	
-	<div class="last-seen-section">
-		<p>
-			<span class="info-label">👀 Last Seen:</span> 
-			<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
-			<% if cat.last_seen > 7.days.ago %>
-				<span class="recent-status status-recent">(Recently)</span>
-			<% elsif cat.last_seen > 30.days.ago %>
-				<span class="recent-status status-awhile">(A while ago)</span>
-			<% else %>
-				<span class="recent-status status-missing">(Missing!)</span>
-			<% end %>
-		</p>
-	</div>
-
-
 		<!-- Photos Section -->
 	<div class="mt-5">
 		<h3>📸 <%= cat.name %>'s Photos <span class="badge bg-secondary"><%= cat.photos.count %></span></h3>
@@ -115,6 +73,50 @@
 			<%= f.submit "Upload Photo", class: "btn btn-primary" %>
 		<% end %>
 	</div>
+
+	<!-- FEEDING STATUS SECTION -->
+	<div class="feeding-section">
+		<% cat.reset_daily_count_if_needed %>
+		<p class="feeding-count"><span class="info-label">Feeding Status:</span> <span class="feeding-number"><%= cat.times_fed_today %>/3</span> today</p>
+		
+		<% if !cat.can_be_fed_today? %>
+			<div class="feeding-status feeding-limit">
+				<p>⛔ <strong>Daily limit reached!</strong></p>
+			</div>
+		<% elsif cat.needs_feeding? %>
+			<div class="feeding-status feeding-needed">
+				<p>⚠️ <strong>Needs food!</strong> Last fed: <span class="time-ago"><%= cat.time_since_last_fed %></span></p>
+				<%= button_to "Feed Now", feed_cat_path(cat), method: :post, class: "feed-btn feed-now-btn" %>
+			</div>
+		<% else %>
+			<div class="feeding-status feeding-ok">
+				<p>✅ <strong>Fed:</strong> <span class="time-ago"><%= cat.time_since_last_fed %></span></p>
+				<%= button_to "Feed Again", feed_cat_path(cat), method: :post, class: "feed-btn feed-again-btn" %>
+			</div>
+		<% end %>
+			<%= button_to "Reset Feeding", reset_feeding_cat_path(cat),
+		method: :post,
+		class: "reset-feeding-btn",
+		data: { confirm: "Reset #{cat.name}'s feeding data to zero?" }
+	%>
+	</div>
+	
+	<div class="last-seen-section">
+		<p>
+			<span class="info-label">👀 Last Seen:</span> 
+			<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
+			<% if cat.last_seen > 7.days.ago %>
+				<span class="recent-status status-recent">(Recently)</span>
+			<% elsif cat.last_seen > 30.days.ago %>
+				<span class="recent-status status-awhile">(A while ago)</span>
+			<% else %>
+				<span class="recent-status status-missing">(Missing!)</span>
+			<% end %>
+		</p>
+	</div>
+
+
+
 
 	<div class="cat_details">
 		<%= link_to "Edit #{cat.name} the Cat", edit_cat_path(cat),class: "btn btn-primary"  %> | 

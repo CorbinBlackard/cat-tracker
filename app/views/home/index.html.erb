@@ -18,6 +18,14 @@
 				<div class="cat-card">
 					<div class="cat-card-body">
 						<h5 class="cat-name"><%= cat.name %></h5>
+						
+						<!-- Photo thumbnail for Most Spotted Cats -->
+						<% if cat.photos.attached? %>
+							<%= image_tag cat.photos.first, 
+								class: "cat-photo-thumbnail mb-2", 
+								style: "width: 100%; height: 150px; object-fit: cover; border-radius: 5px;" %>
+						<% end %>
+						
 						<div class="cat-details">
 							<p><strong>Spotted:</strong> <%= cat.times_spotted %> times today</p>
 							<p><strong>Color:</strong> <%= cat.color %></p>
@@ -47,6 +55,13 @@
 				<% Cat.order(created_at: :desc).limit(5).each do |cat| %>
 					<li class="cats-list-item">
 						<div class="cat-info">
+							<!-- Small photo thumbnail for Cat Profiles list -->
+							<% if cat.photos.attached? %>
+								<%= image_tag cat.photos.first, 
+									class: "float-start me-3 rounded", 
+									style: "width: 60px; height: 60px; object-fit: cover; border: 2px solid #dee2e6;" %>
+							<% end %>
+							
 							<strong class="cat-info-name"><%= cat.name %></strong> - 
 							<span class="cat-info-color"><%= cat.color %> <%= cat.pattern %></span>
 							<br>
