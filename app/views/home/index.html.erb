@@ -1,15 +1,20 @@
 <div class="home-container">
-   <div class="home-hero">
-      <h1 class="home-title">🐱 Cat Tracker</h1>
-      <p class="home-lead">Track and care for stray cats at your apartment complex</p>
-      <hr class="home-divider">
-      <p class="home-stats">Currently tracking <strong><%= Cat.count %></strong> cats in the system</p>
-      <h3 class="home-subtitle"> Spot a cat? </h3>
-      <div class="home-actions">
-         <%= link_to "View All Cats", cats_path, class: "btn btn-primary btn-lg mr-3" %>
-         <%= link_to "Add New Cat", new_cat_path, class: "btn btn-success btn-lg" %>
-      </div>
-   </div>
+	<div class="text-center mb-6", style="margin-top: 5rem">
+		<h1 class="display-6 mb-2">🐱 Cat Tracker</h1>
+		<p class="display-6 mb-4">Community cat tracking for apartment complexes</p>
+		
+		<div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+			<%= link_to "View All Cats", cats_path, class: "btn btn-primary" %>
+			<%= link_to "Add New Cat", new_cat_path, class: "btn btn-outline-success" %>
+			<%= link_to "Feeding Guidelines", guidelines_path, class: "btn btn-outline-info" %>
+		</div>
+		
+		<div class="stats-bar d-flex justify-content-center gap-4 display-8">
+			<span>📊 Tracking <strong><%= Cat.count %></strong> cats</span>
+			<span>👁️ <strong><%= Cat.sum(:times_spotted) %></strong> total sightings</span>
+			<span>🍗 <strong><%= Cat.where("times_fed_today > 0").count %></strong> fed today</span>
+		</div>
+	</div>
 
 	<h2 class="section-title">Most Spotted Cats</h2>
 	<div class="cats-grid">
