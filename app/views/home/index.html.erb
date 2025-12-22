@@ -10,9 +10,11 @@
 		</div>
 		
 		<div class="stats-bar d-flex justify-content-center gap-4 display-8">
-			<span>📊 Tracking <strong><%= Cat.count %></strong> cats</span>
-			<span>👁️ <strong><%= Cat.sum(:times_spotted) %></strong> total sightings</span>
-			<span>🍗 <strong><%= Cat.where("times_fed_today > 0").count %></strong> fed today</span>
+			<span>📊 Tracking <strong><%= Cat.count %></strong> cats</span>|
+			<span>👁️ <strong><%= Cat.sum(:times_spotted) %></strong> total sightings</span>|
+			<span>🍗 <strong><%= Cat.where("times_fed_today > 0").count %></strong> fed today</span> |
+			<% hungry_cats = Cat.all.count(&:can_be_fed_today?)%>
+			<span> <strong> <%= hungry_cats %> </strong> can still be fed</span>
 		</div>
 	</div>
 
