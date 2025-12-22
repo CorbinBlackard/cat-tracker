@@ -1,45 +1,48 @@
+
 <h3 class="cat-name-large"><%= cat.name %></h3>
+<% if cat.photos.attached? %>
+	<%= image_tag cat.photos.first, class: "cat-photo-thumbnail mb-4", style: "margin-bottome: 5px" %>
+<% end %>
+<div class="cat-basic-info">
+	<p>
+		<span class="info-label">Color:</span> <span class="info-value"><%= cat.color %></span> 
+		<span class="info-separator">|</span>
+		<span class="info-label">Location:</span> <span class="info-value"><%= cat.location %></span>
+	</p>
+</div>
 
-	<div class="cat-basic-info">
-		<p>
-			<span class="info-label">Color:</span> <span class="info-value"><%= cat.color %></span> 
-			<span class="info-separator">|</span>
-			<span class="info-label">Location:</span> <span class="info-value"><%= cat.location %></span>
-		</p>
+<div class="cat-personality">
+	<p>
+		<span class="info-label">Temperament:</span> <span class="info-value"><%= cat.temperament %></span>
+		<span class="info-separator">|</span>
+		<span class="info-label">Pattern:</span> <span class="info-value"><%= cat.pattern %></span>
+	</p>
+</div>
+
+<% if cat.notes.present? %>
+	<div class="cat-notes">
+		<p><span class="info-label">Community Notes:</span> <span class="info-value"><%= cat.notes %></span></p>
 	</div>
-	
-	<div class="cat-personality">
-		<p>
-			<span class="info-label">Temperament:</span> <span class="info-value"><%= cat.temperament %></span>
-			<span class="info-separator">|</span>
-			<span class="info-label">Pattern:</span> <span class="info-value"><%= cat.pattern %></span>
-		</p>
-	</div>
-	
-	<% if cat.notes.present? %>
-		<div class="cat-notes">
-			<p><span class="info-label">Community Notes:</span> <span class="info-value"><%= cat.notes %></span></p>
-		</div>
+<% end %>
+
+<div class="cat-food">
+	<% if cat.favorite_food.present? %>
+		<p><span class="info-label">🍗 Favorite Food:</span> <span class="info-value"><%= cat.favorite_food %></span></p>
+	<%else%>
+		<p class="no-food"><em>Favorite food has not been set</em></p>
 	<% end %>
-	
-	<div class="cat-food">
-		<% if cat.favorite_food.present? %>
-			<p><span class="info-label">🍗 Favorite Food:</span> <span class="info-value"><%= cat.favorite_food %></span></p>
-		<%else%>
-			<p class="no-food"><em>Favorite food has not been set</em></p>
-		<% end %>
-	</div>
+</div>
 
-	<div class="last-seen-section">
-		<p>
-			<span class="info-label">👀 Last Seen:</span> 
-			<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
-			<% if cat.last_seen > 7.days.ago %>
-				<span class="recent-status status-recent">(Recently)</span>
-			<% elsif cat.last_seen > 30.days.ago %>
-				<span class="recent-status status-awhile">(A while ago)</span>
-			<% else %>
-				<span class="recent-status status-missing">(Missing!)</span>
-			<% end %>
-		</p>
-	</div>
+<div class="last-seen-section">
+	<p>
+		<span class="info-label">👀 Last Seen:</span> 
+		<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
+		<% if cat.last_seen > 7.days.ago %>
+			<span class="recent-status status-recent">(Recently)</span>
+		<% elsif cat.last_seen > 30.days.ago %>
+			<span class="recent-status status-awhile">(A while ago)</span>
+		<% else %>
+			<span class="recent-status status-missing">(Missing!)</span>
+		<% end %>
+	</p>
+</div>
