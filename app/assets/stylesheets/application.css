@@ -39,6 +39,57 @@
 	padding: 0 20px;
 }
 
+/* Homepage layout */
+.homepage-container {
+	max-width: 100%;
+	margin: 0;
+}
+
+.sidebar-column {
+	width: 280px;
+	min-width: 280px;
+	padding: 20px;
+	background: #f8f9fa;
+	border-right: 1px solid #dee2e6;
+}
+
+.main-content-column {
+	flex: 1;
+	padding: 20px;
+	max-width: calc(100% - 280px);
+}
+
+/* Missing cats sidebar */
+.missing-cats-sidebar {
+	position: sticky;
+	top: 80px;
+}
+
+/* For other pages */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.homepage-container {
+		flex-direction: column;
+	}
+
+	.sidebar-column {
+		width: 100%;
+		min-width: 100%;
+		border-right: none;
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	.main-content-column {
+		max-width: 100%;
+	}
+}
+
 .home-hero {
 	background: #f8f9fa;
 	border-radius: 10px;
@@ -734,6 +785,7 @@
 .cat-photo-card:hover {
 	transform: translateY(-5px);
 }
+
 /* Cat photo thumbnails */
 .cat-photo-thumbnail {
 	width: 100%;
@@ -754,4 +806,110 @@
 .cats-list-item .cat-info {
 	overflow: hidden;
 	/* Clear float */
+}
+
+/* Add these to your stylesheet */
+.missing-cats-sidebar {
+	background: #f8f9fa;
+	border-radius: 8px;
+	padding: 20px;
+	border: 1px solid #dee2e6;
+	margin-bottom: 20px;
+}
+
+.sticky-top {
+	position: -webkit-sticky;
+	position: sticky;
+}
+
+.sidebar-title {
+	color: #d84315;
+	margin-bottom: 15px;
+}
+
+
+.missing-cat-item {
+	padding: 10px;
+	border-bottom: 1px solid #ffecb3;
+}
+
+.missing-cat-item:last-child {
+	border-bottom: none;
+}
+
+.missing-cat-link {
+	text-decoration: none;
+	color: #333;
+	display: block;
+}
+
+.missing-cat-link:hover {
+	background: #fff3cd;
+	border-radius: 4px;
+	padding: 8px;
+	margin: -8px;
+}
+
+.all-accounted {
+	text-align: center;
+	color: #388e3c;
+	padding: 10px;
+}
+
+/* Basic sidebar positioning */
+.sidebar-column {
+	padding: 15px;
+	background: white;
+}
+
+.main-content {
+	padding: 20px;
+	/* margin-left: -14rem; */
+}
+
+/* Missing cats box */
+
+.sidebar-title {
+	font-size: 1.1rem;
+	margin-bottom: 15px;
+	color: #333;
+}
+
+.missing-cats-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.missing-cat-item {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.missing-cat-item:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+.missing-cat-link {
+	text-decoration: none;
+	color: #0066cc;
+}
+
+.missing-cat-link:hover {
+	text-decoration: underline;
+}
+
+.missing-cat-details {
+	font-size: 0.9rem;
+	color: #666;
+	margin-top: 3px;
+}
+
+.all-accounted {
+	padding: 10px;
+	background: #e7f7e7;
+	border-radius: 4px;
+	text-align: center;
 }

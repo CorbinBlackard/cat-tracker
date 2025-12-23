@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+    @homepage = true
     def index
       # Eager load photos to prevent N+1 queries
       @top_cats = Cat.with_attached_photos.order(times_spotted: :desc).limit(3)

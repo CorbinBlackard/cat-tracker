@@ -16,22 +16,7 @@
 		</div>
 	</div>
 
-				<div>
-				<h3>⚠️ <%= Cat.missing_cats.count%> Missing Cats ⚠️ </h3>
-				<% missing = Cat.missing_cats%>
-				<% if missing.any?%>
-					<% missing.each do |cat| %>
-						<li>
-							<p><strong> <%= link_to cat.name, cat_path(cat), style: "text-decoration: none; color: black;"%> </strong></p>
-							Last seen:<p><%= cat.last_seen%></p>
-							Color: <%= cat.color %>
-							
-						</li>
-					<% end %>
-				<% else %>
-					All cats accounted for!
-				<% end %>
-			</div>
+
 
 	<h2 class="section-title">Today's Most Spotted Cat 🏆</h2>
 	<div class="king-block-card">
