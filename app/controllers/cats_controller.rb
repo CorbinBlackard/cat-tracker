@@ -103,6 +103,7 @@ class CatsController < ApplicationController
       redirect_to @cat, notice: "Photo removed"
    end
 
+
    private
    # Use callbacks to share common setup or constraints between actions.
    def set_cat

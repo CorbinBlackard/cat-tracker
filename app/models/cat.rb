@@ -42,6 +42,11 @@ class Cat < ApplicationRecord
    has_many_attached :photos
    validate :validate_photos
 
+
+   def self.missing_cats
+      Cat.where("last_seen < ? OR last_seen IS NULL", 48.hours.ago)
+   end
+
    def spotted!
       update(times_spotted: times_spotted + 1)
       update(last_seen: Time.now)
