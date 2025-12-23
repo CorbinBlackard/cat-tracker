@@ -13,9 +13,35 @@
 			<span>📊 Tracking <strong><%= Cat.count %></strong> cats</span>|
 			<span>👁️ <strong><%= Cat.sum(:times_spotted) %></strong> total sightings</span>|
 			<span>🍗 <strong><%= Cat.where("times_fed_today > 0").count %></strong> fed today</span> |
-			<% hungry_cats = Cat.all.count(&:can_be_fed_today?)%>
-			<span> <strong> <%= hungry_cats %> </strong> can still be fed</span>
 		</div>
+	</div>
+
+	<h2 class="section-title">Today's Most Spotted Cat 🏆</h2>
+	<div class="king-block-card">
+		<% if @king_block && @king_block.times_spotted > 0 %>
+			<%= link_to @king_block, class: "king-block-link", style: "text-decoration: none; color: black;" do %>
+				<div class="king-block-content">
+				<div class="crown">👑</div>
+				<h3><%= @king_block.name %></h3>
+				
+				<div class="king-block-stats">
+					<p><strong>Spotted Today:</strong> <%= @king_block.times_spotted %> times</p>
+					<p><strong>Last Seen:</strong> 
+						<% if @king_block.last_seen %>
+						<%= time_ago_in_words(@king_block.last_seen) %> ago
+						<% else %>
+						Never
+						<% end %>
+					</p>
+				</div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="no-king-today">
+				<p>No cats spotted today yet!</p>
+				<small>Be the first to spot a cat!</small>
+			</div>
+		<% end %>
 	</div>
 
 	<h2 class="section-title">Most Spotted Cats</h2>
