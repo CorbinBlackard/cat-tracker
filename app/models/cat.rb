@@ -133,6 +133,11 @@ class Cat < ApplicationRecord
          update(times_fed_today: 0)
    end
 
+   def missing_cat?
+      last_seen < 48.hours.ago || last_seen.nil?
+   end
+
+
    private
    # In app/models/cat.rb, update validate_photos:
 

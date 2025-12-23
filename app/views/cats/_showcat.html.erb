@@ -5,6 +5,20 @@
 		<%= image_tag cat.photos.first, class: "cat-photo-thumbnail mb-4", style: "margin-bottome: 5px" %>
 	<% end %>
 <%end%>
+<h5><%= tag.span("⚠️ Missing") if cat.missing_cat? %></h5>
+<div class="last-seen-section">
+	<p>
+		<span class="info-label">👀 Last Seen:</span> 
+		<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
+		<% if cat.last_seen > 7.days.ago %>
+			<span class="recent-status status-recent">(Recently)</span>
+		<% elsif cat.last_seen > 30.days.ago %>
+			<span class="recent-status status-awhile">(A while ago)</span>
+		<% else %>
+			<span class="recent-status status-missing">(Missing!)</span>
+		<% end %>
+	</p>
+</div>
 <div class="cat-basic-info">
 	<p>
 		<span class="info-label">Color:</span> <span class="info-value"><%= cat.color %></span> 
@@ -33,18 +47,4 @@
 	<%else%>
 		<p class="no-food"><em>Favorite food has not been set</em></p>
 	<% end %>
-</div>
-
-<div class="last-seen-section">
-	<p>
-		<span class="info-label">👀 Last Seen:</span> 
-		<span class="time-ago"><%= time_ago_in_words(cat.last_seen) %> ago</span>
-		<% if cat.last_seen > 7.days.ago %>
-			<span class="recent-status status-recent">(Recently)</span>
-		<% elsif cat.last_seen > 30.days.ago %>
-			<span class="recent-status status-awhile">(A while ago)</span>
-		<% else %>
-			<span class="recent-status status-missing">(Missing!)</span>
-		<% end %>
-	</p>
 </div>
