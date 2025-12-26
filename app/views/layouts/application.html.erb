@@ -28,34 +28,7 @@
 			<% if current_page?(root_path) %>
 				<%# HOMEPAGE: Flex layout with sidebar %>
 				<div class="homepage-container d-flex">
-					<div class="sidebar-column">
-						<div class="missing-cats-sidebar">
-							<% missing_cats = Cat.missing_cats %>
-							
-							<h5 class="sidebar-title mb-3">
-								⚠️ Missing Cats <span class="badge bg-warning"><%= missing_cats.count %></span>
-							</h5>
-							
-							<% if missing_cats.any? %>
-								<div class="list-group">
-									<% missing_cats.each do |cat| %>
-										<%= link_to cat, class: "list-group-item list-group-item-action py-2" do %>
-											<strong><%= cat.name %></strong>
-											<div class="text-muted small mt-1">
-												Last seen: <%= time_ago_in_words(cat.last_seen) %> ago<br>
-												Color: <%= cat.color %>
-											</div>
-										<% end %>
-									<% end %>
-								</div>
-							<% else %>
-								<div class="alert alert-success">
-									🎉 All cats accounted for!
-								</div>
-							<% end %>
-						</div>
-					</div>
-					
+					<%= render partial: "/layouts/missing"%>
 					<div class="main-content-column">
 						<%= yield %>
 					</div>
