@@ -43,13 +43,29 @@ class Cat < ApplicationRecord
    validate :validate_photos
 
 
-   def self.missing_cats
-      Cat.where("last_seen < ? OR last_seen IS NULL", 48.hours.ago)
-   end
+   # def self.missing_cats
+   #    Cat.where("last_seen < ? OR last_seen IS NULL", 48.hours.ago)
+   # end
+
+   # Using scope instead of self.missing_cats method
+   scope :missing, -> { where("last_seen < ? OR last_seen IS NULL", 48.hours.ago) }
 
    def spotted!
-      update(times_spotted: times_spotted + 1)
-      update(last_seen: Time.now)
+      if last_seen.nil? || last_seen < 24.hours.ago
+         self.times_spotted = 0
+      end
+
+      self.times_spotted += 1
+      self.last_seen = Time.current
+      save
+   end
+
+   def todays_spottings
+      if last_seen && last_seen >= 24.hours.ago
+         times_spotted
+      else
+         0
+      end
    end
 
    def reset_spots
@@ -129,7 +145,7 @@ class Cat < ApplicationRecord
       end
 
       update(
-      last_fed_at: Time.now,
+      last_fed_at: Time.current,
       times_fed_today: times_fed_today + 1
       )
    end
@@ -139,7 +155,7 @@ class Cat < ApplicationRecord
    end
 
    def missing_cat?
-      last_seen < 48.hours.ago || last_seen.nil?
+      last_seen.nil? || last_seen < 48.hours.ago
    end
 
 

@@ -1,12 +1,12 @@
 <div class="sidebar-column">
 	<div class="missing-cats-sidebar">
-		<% missing_cats = Cat.missing_cats %>
+		<% missing_cats = Cat.missing %>
 		
 		<h5 class="sidebar-title mb-3">
 			⚠️ Missing Cats <span class="badge bg-warning"><%= missing_cats.count %></span>
 		</h5>
 		
-		<% if missing_cats.any? %>
+		<% if Cat.missing.any? %>
 			<div class="list-group">
 				<% missing_cats.each do |cat| %>
 					<%= link_to cat, class: "list-group-item list-group-item-action py-2" do %>
