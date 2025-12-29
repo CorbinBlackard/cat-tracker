@@ -56,7 +56,7 @@ class Cat < ApplicationRecord
       end
 
       self.times_spotted += 1
-      self.last_seen = Time.current
+      self.last_seen = Time.now
       save
    end
 
